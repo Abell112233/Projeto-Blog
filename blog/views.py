@@ -1,5 +1,10 @@
 from django.shortcuts import render
-
+from .models import Eu, Filmes, Series
 # Create your views here.
 def index(request):
-    return render(request, 'blog/index.html')
+    eu = Eu.objects.all()
+    contexto = {
+        "eu" : eu
+    }
+    
+    return render(request, 'blog/index.html', contexto)

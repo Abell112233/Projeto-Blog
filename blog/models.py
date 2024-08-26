@@ -17,3 +17,11 @@ class Series(models.Model):
     def __str__(self):
         return self.nome
     
+class Eu(models.Model):
+    nome = models.CharField(max_length=100)
+    foto = models.ImageField(upload_to='eu', null=True, blank=True)
+    descricao = models.TextField()
+    
+    def __str__(self):
+        return self.nome
+    

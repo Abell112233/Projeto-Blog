@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
 {% block bloco %}
-<header class="masthead bg-primary text-white text-center">
+<header class="masthead bg-primary text-white text-center" id="inicio">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
         <img class="masthead-avatar mb-5" src="../../../media/abell.jpeg" alt="..." />
@@ -13,33 +13,36 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0">Musico - Bonito - Comprometido</p>
+        <p class="masthead-subheading font-weight-light mb-0">Musico - Bonito - Comprometido - Faço informatica - Gosto de volêi - Tenho 19 anos</p>
     </div>
 </header>
 <!-- Portfolio Section-->
-<section class="page-section portfolio" id="portfolio">
+<section class="page-section portfolio" id="portfolio2">
     <div class="container">
         <!-- Portfolio Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Filmes Preferidos</h2>
         <!-- Icon Divider-->
-        <div class="divider-custom">
+        <a href=""><div class="divider-custom">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
-        </div>
+        </div></a>
         <!-- Portfolio Grid Items-->
-         {% for filmes in filmes  %}
+         {% for filme in filmes  %}
+        <a href="{% url 'sobrefilme' filme.id %}">
             <div class="row justify-content-center">
-                <!-- Portfolio Item 1-->
+         <!-- Portfolio Item 1-->
                 <div class="col-md-6 col-lg-4 mb-5">
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="{{ filmes.foto.url }}" alt="..." />
+                        <img class="img-fluid" src="{{ filme.foto.url }}" alt="..." />
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+        </a>
+        {% endfor %}
             <!-- Portfolio Item 2-->
 </section>
 <section class="page-section portfolio" id="portfolio">
@@ -53,17 +56,20 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Portfolio Grid Items-->
-        <div class="row justify-content-center">
+        {% for serie in series %} 
+        <a href="{% url 'sobreserie' serie.id %}"><div class="row justify-content-center">
             <!-- Portfolio Item 1-->
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="..." />
+                    <img class="img-fluid" src="{{ serie.foto.url }}" alt="..." />
                 </div>
             </div>
-            <!-- Portfolio Item 2-->
+        </div>
+        </a>  <!-- Portfolio Item 2-->
+        {% endfor %}
 </section>
 <!-- About Section-->
 

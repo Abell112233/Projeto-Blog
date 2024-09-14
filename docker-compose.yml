@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+
+    image:  django_project
+    depends_on:
+      - nginx
+      - db
+    env_file:
+      - .env
+    volumes:
+      - static_data:/app/staticfiles
+      - banco_data:/app/banco
+      - media_data:/app/media
+    
+    command: ./start
+    restart: unless-stopped
+
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/nginx/Dockerfile
+    volumes:
+      - static_data:/app/staticfiles
+      - media_data:/app/media
+    ports:
+      - 82:80
+    restart: unless-stopped
+
+  db:
+    image: postgres
+    volumes:
+      - banco_data:/app/banco
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_dev
+
+volumes:
+  banco_data:
+  static_data:
+  media_data: 
